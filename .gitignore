@@ -1,0 +1,8 @@
+.gradle
+build
+.idea
+.settings
+kls_database.db
+.project
+*.class
+.classpath
