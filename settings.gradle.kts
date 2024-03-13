@@ -1,4 +1,4 @@
 plugins {}
 
-rootProject.name = "02-compensacao-metodos-escola"
+rootProject.name = "02-escola"
 include("app")

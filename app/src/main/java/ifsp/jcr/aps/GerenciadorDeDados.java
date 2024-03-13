@@ -3,7 +3,7 @@ package ifsp.jcr.aps;
 import java.io.IOException;
 import java.util.HashSet;
 
-import ifsp.jcr.aps.ServicoDeMensageiro.Mensageiro;
+import ifsp.jcr.aps.Mensageiro;
 
 public class GerenciadorDeDados {
 

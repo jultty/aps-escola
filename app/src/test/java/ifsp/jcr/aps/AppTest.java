@@ -1,13 +1,10 @@
 package ifsp.jcr.aps;
 
-import ifsp.jcr.aps.ServicoDeMensageiro.Mensageiro;
-
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.HashSet;
 
-import static ifsp.jcr.aps.ServicoDeControlador.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
