@@ -6,7 +6,7 @@ public class Mensagem {
   private Integer[] ids;
   private String corpo;
 
-  Mensagem() {};
+  Mensagem() {}
 
   Mensagem(String token, OPERACAO operacao, Integer[] ids, String corpo) {
     this.token = token;

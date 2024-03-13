@@ -18,7 +18,7 @@ public class GerenciadorDeDados {
   public static <T> Mensagem criar(T t) {
     if (t instanceof Turma) {
       turmas.add((Turma) t);
-    };
+    }
 
     return new Mensagem("OK");
   }

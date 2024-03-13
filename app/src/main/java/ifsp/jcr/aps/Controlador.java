@@ -6,10 +6,8 @@ public class Controlador {
 
   public static Mensagem solicitar(Mensagem mensagem) throws IOException, ClassNotFoundException {
     return switch (mensagem.obterOperacao()) {
-      case INCLUIR -> {
-        yield GerenciadorDeDados.criar(Mensageiro.decodificar(mensagem.obterCorpo()));
-      }
-      case LISTAR -> { yield GerenciadorDeDados.listar(new Turma()); }
+      case INCLUIR -> GerenciadorDeDados.criar(Mensageiro.decodificar(mensagem.obterCorpo()));
+      case LISTAR -> GerenciadorDeDados.listar(new Turma());
       default -> null;
     };
   }
