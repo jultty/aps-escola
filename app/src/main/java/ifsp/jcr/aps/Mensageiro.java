@@ -2,10 +2,10 @@ package ifsp.jcr.aps;
 
 import java.io.*;
 import java.util.Base64;
-import java.util.HashSet;
+import java.util.HashMap;
 
 public class Mensageiro<T> {
-  static String decodificar(Serializable object) throws IOException {
+  static String codificar(Serializable object) throws IOException {
     ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
     ObjectOutputStream objectOutStream = new ObjectOutputStream(byteOutStream);
     objectOutStream.writeObject(object);
@@ -23,14 +23,14 @@ public class Mensageiro<T> {
     return object;
   }
 
-  public static <T> HashSet<T> decodificarVarias(String encodedCollection) throws IOException, ClassNotFoundException {
+  public static <T> HashMap<Integer, T> decodificarVarias(String encodedCollection) throws IOException, ClassNotFoundException {
     Object decodedCollection = Mensageiro.decodificar(encodedCollection);
-    if (decodedCollection instanceof HashSet) {
-      if (!((HashSet<?>) decodedCollection).isEmpty()) {
-        return (HashSet<T>) decodedCollection;
+    if (decodedCollection instanceof HashMap) {
+      if (!((HashMap<Integer, ?>) decodedCollection).isEmpty()) {
+        return (HashMap<Integer, T>) decodedCollection;
       }
-      throw new IllegalArgumentException("HashSet is empty");
+      throw new IllegalArgumentException("HashMap is empty");
     }
-    throw new IllegalArgumentException("Not a HashSet");
+    throw new IllegalArgumentException("Not a HashMap");
   }
 }
