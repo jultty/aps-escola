@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 //  1. Formar uma turma, ou seja
 //     - 1.1. relacionar um professor com uma disciplina
@@ -14,29 +13,55 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AppTest {
 
-  @Test void formarUmaTurma() throws IOException, ClassNotFoundException {
+  Integer[] idAlunos = { 425, 480, 412 };
+  Turma turma1 = new Turma(101, "2024.1", 38, 10, idAlunos);
+  Turma turma2 = new Turma(102, "2024.1", 31, 12, idAlunos);
 
-    Integer[] idAlunos = { 1, 2, 3 };
-    Turma turma = new Turma( 1, "2024.1", 1, 1, idAlunos );
-    Turma turma2 = new Turma( 2, "2024.1", 2, 1, idAlunos );
+  @Test
+  void formarUmaTurma() throws IOException, ClassNotFoundException {
 
-    Mensagem resposta = Controlador.solicitar(
-      new Mensagem(OPERACAO.INCLUIR, Mensageiro.decodificar(turma))
+    Mensagem resposta1 = Controlador.solicitar(
+        new Mensagem(OPERACAO.INCLUIR, Mensageiro.decodificar(turma1))
     );
     Mensagem resposta2 = Controlador.solicitar(
         new Mensagem(OPERACAO.INCLUIR, Mensageiro.decodificar(turma2))
     );
 
-    assertEquals(resposta.obterCorpo(), "OK");
+    assertEquals(resposta1.obterCorpo(), "OK");
     assertEquals(resposta2.obterCorpo(), "OK");
 
-    Mensagem resposta3 = Controlador.solicitar(
-      new Mensagem(OPERACAO.LISTAR, Mensageiro.decodificar(turma))
+    Mensagem respostaListagem = Controlador.solicitar(
+        new Mensagem(OPERACAO.LISTAR, Mensageiro.decodificar(Turma.class))
     );
 
-    HashSet<Turma> listaDeTurmas = Mensageiro.decodificarVarias(resposta3.obterCorpo());
+    HashSet<Turma> listaDeTurmas = Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
 
     assertNotNull(listaDeTurmas);
     listaDeTurmas.forEach(t -> System.out.println(t.obterId()));
+    assertTrue(listaDeTurmas.contains(turma1));
+    assertTrue(listaDeTurmas.contains(turma2));
+  }
+
+  @Test
+  void umaTurmaPersisteEntreTestes() throws IOException, ClassNotFoundException {
+    Mensagem resposta = Controlador.solicitar(
+        new Mensagem(OPERACAO.LISTAR, Mensageiro.decodificar(Turma.class)));
+    HashSet<Turma> listaDeTurmas = Mensageiro.decodificarVarias(resposta.obterCorpo());
+    assertNotNull(listaDeTurmas);
+    listaDeTurmas.forEach(t -> System.out.println(t.obterId()));
+    assertTrue(listaDeTurmas.contains(turma1));
+    assertTrue(listaDeTurmas.contains(turma2));
+    System.out.println(turma2.obterIdAlunos()[0]);
+    System.out.println(turma2.obterIdAlunos()[1]);
+    System.out.println(turma2.obterIdAlunos()[2]);
+  }
+
+  @Test void turmasRecebidasPorListagemSaoIguaisAsTurmasCriadas() throws IOException, ClassNotFoundException {
+    Mensagem resposta = Controlador.solicitar(new Mensagem(OPERACAO.LISTAR, Mensageiro.decodificar(Turma.class)));
+    HashSet<Turma> listaDeTurmas = Mensageiro.decodificarVarias(resposta.obterCorpo());
+    assertNotNull(listaDeTurmas);
+    assertTrue(listaDeTurmas.contains(turma1));
+    assertTrue(listaDeTurmas.contains(turma2));
+    assertEquals(listaDeTurmas.size(), 2);
   }
 }
