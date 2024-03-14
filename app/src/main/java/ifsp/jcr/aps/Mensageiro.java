@@ -26,7 +26,7 @@ public class Mensageiro<T> {
   public static <T> HashMap<Integer, T> decodificarVarias(String encodedCollection) throws IOException, ClassNotFoundException {
     Object decodedCollection = Mensageiro.decodificar(encodedCollection);
     if (decodedCollection instanceof HashMap) {
-      if (!((HashMap<Integer, ?>) decodedCollection).isEmpty()) {
+      if (!((HashMap<Integer, T>) decodedCollection).isEmpty()) {
         return (HashMap<Integer, T>) decodedCollection;
       }
       throw new IllegalArgumentException("HashMap is empty");

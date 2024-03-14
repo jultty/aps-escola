@@ -1,23 +1,31 @@
 package ifsp.jcr.aps;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 
-class Aluno {
+class Aluno implements Serializable {
   private Integer id;
-  private HashSet<Integer> idDisciplinas;
+  private String nome;
+  private HashSet<Integer> idDisciplinas = new HashSet<>();
+
+  public Aluno(Integer id, String nome) {
+    this.id = id;
+    this.nome = nome;
+  }
 
   public Aluno(Integer id) {
     this.id = id;
   }
 
-  public Integer obterId() {
-    return id;
+  public void matricular(Integer idDisciplina) {
+    idDisciplinas.add(idDisciplina);
   }
 
-  public HashSet<Integer> obterIdDisciplinas() {
-    return idDisciplinas;
-  }
+  public Integer obterId() { return id; }
+  public String obterNome() { return nome; }
+  public HashSet<Integer> obterIdDisciplinas() { return idDisciplinas; }
 
   @Override
   public boolean equals(Object o) {
@@ -31,4 +39,7 @@ class Aluno {
   public int hashCode() {
     return Objects.hash(id, idDisciplinas);
   }
+
+  @Serial
+  private static final long serialVersionUID = 1L;
 }

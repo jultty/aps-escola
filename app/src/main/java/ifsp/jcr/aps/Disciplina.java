@@ -1,8 +1,10 @@
 package ifsp.jcr.aps;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 
-class Disciplina {
+class Disciplina implements Serializable {
   private Integer id;
   private String nome;
   private String descricao;
@@ -37,4 +39,7 @@ class Disciplina {
   public int hashCode() {
     return Objects.hash(id, nome, descricao);
   }
+
+  @Serial
+  private static final long serialVersionUID = 1L;
 }

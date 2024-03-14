@@ -1,14 +1,16 @@
 package ifsp.jcr.aps;
 
+import java.util.HashSet;
+
 public class Mensagem {
   private String token;
   private OPERACAO operacao;
-  private Integer[] ids;
+  private HashSet<Integer> ids;
   private String corpo;
 
   Mensagem() {}
 
-  Mensagem(String token, OPERACAO operacao, Integer[] ids, String corpo) {
+  Mensagem(String token, OPERACAO operacao, HashSet<Integer> ids, String corpo) {
     this.token = token;
     this.operacao = operacao;
     this.ids = ids;
@@ -20,6 +22,12 @@ public class Mensagem {
     this.corpo = corpo;
   }
 
+  Mensagem(OPERACAO operacao, HashSet<Integer> ids, String corpo) {
+    this.operacao = operacao;
+    this.ids = ids;
+    this.corpo = corpo;
+  }
+
   Mensagem(String corpo) {
     this.corpo = corpo;
   }
@@ -27,8 +35,8 @@ public class Mensagem {
   OPERACAO obterOperacao() {
     return operacao;
   }
-
   String obterCorpo() {
     return corpo;
   }
+  HashSet<Integer> obterIds() { return ids; }
 }

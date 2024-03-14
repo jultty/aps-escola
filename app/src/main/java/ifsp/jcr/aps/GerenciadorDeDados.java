@@ -2,37 +2,61 @@ package ifsp.jcr.aps;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class GerenciadorDeDados {
 
-  private static HashMap<Integer, Curso> cursos;
-  private static HashMap<Integer, Professor> professores;
-  private static HashMap<Integer, Disciplina> disciplinas;
+  private static HashMap<Integer, Curso> cursos = new HashMap<>();
+  private static HashMap<Integer, Professor> professores = new HashMap<>();
+  private static HashMap<Integer, Disciplina> disciplinas = new HashMap<>();
   private static HashMap<Integer, Turma> turmas = new HashMap<>();
-  private static HashMap<Integer, Aluno> alunos;
-  private static HashMap<Integer, Participacao> participacoes;
-  private static HashMap<Integer, Administrador> administradores;
+  private static HashMap<Integer, Aluno> alunos = new HashMap<>();
+  private static HashMap<Integer, Participacao> participacoes = new HashMap<>();
+  private static HashMap<Integer, Administrador> administradores = new HashMap<>();
 
-  public static <T> Mensagem criar(T t) {
+  public static <T> Mensagem inserir(T t) {
     if (t instanceof Turma) {
       turmas.put(((Turma) t).obterId(), (Turma) t);
     } else if (t instanceof Professor) {
       professores.put(((Professor) t).obterId(), (Professor) t);
     } else if (t instanceof Aluno) {
       alunos.put(((Aluno) t).obterId(), (Aluno) t);
+    } else if (t instanceof Disciplina) {
+      disciplinas.put(((Disciplina) t).obterId(), (Disciplina) t);
     }
     return new Mensagem("OK");
   }
 
   public static <T> Mensagem listar(T t) throws IOException {
-    if (t instanceof Turma) {
+    if (t == Turma.class) {
       return new Mensagem(Mensageiro.codificar(turmas));
-    } else if (t instanceof Professor) {
+    } else if (t == Professor.class) {
       return new Mensagem(Mensageiro.codificar(professores));
-    } else if (t instanceof Aluno) {
+    } else if (t == Aluno.class) {
       return new Mensagem(Mensageiro.codificar(alunos));
+    } else if (t == Disciplina.class) {
+      return new Mensagem(Mensageiro.codificar(disciplinas));
+    } else if (t == Curso.class) {
+      return new Mensagem(Mensageiro.codificar(cursos));
+    } else if (t == Administrador.class) {
+      return new Mensagem(Mensageiro.codificar(administradores));
     }
-    return new Mensagem();
+    throw new IllegalArgumentException();
+  }
+
+  public static Mensagem matricular(HashSet<Integer> idAlunos, String idDisciplina) {
+    if (!disciplinas.containsKey(Integer.valueOf(idDisciplina))) {
+      throw new IllegalArgumentException("A disciplina " + idDisciplina + " não existe");
+    }
+    Disciplina disciplina = disciplinas.get(Integer.valueOf(idDisciplina));
+    for (Integer idAluno : idAlunos) {
+      if (!alunos.containsKey(idAluno)) {
+        throw new IllegalArgumentException("O aluno " + idAluno + " não existe");
+      }
+      Aluno aluno = alunos.get(idAluno);
+      aluno.matricular(disciplina.obterId());
+    }
+    return new Mensagem("OK");
   }
 }
 
