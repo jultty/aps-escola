@@ -13,8 +13,9 @@ public class GerenciadorDeDados {
     private static HashMap<Integer, Aluno> alunos = new HashMap<>();
     private static HashMap<Integer, Participacao> participacoes = new HashMap<>();
     private static HashMap<Integer, Administrador> administradores = new HashMap<>();
+    private static HashMap<Integer, Aula> aulas = new HashMap<>();
 
-    private GerenciadorDeDados() {};
+    private GerenciadorDeDados() {}
 
     public static <T> Mensagem inserir(T t) {
       if (t instanceof Turma) {
@@ -29,6 +30,10 @@ public class GerenciadorDeDados {
         cursos.put(((Curso) t).obterId(), (Curso) t);
       } else if (t instanceof Participacao) {
         participacoes.put(((Participacao) t).obterId(), (Participacao) t);
+      } else if (t instanceof Aula) {
+        aulas.put(((Aula) t).obterId(), (Aula) t);
+      } else {
+        throw new IllegalArgumentException("GerenciadorDeDados.inserir: Classe desconhecida");
       }
       return new Mensagem("OK");
     }
@@ -48,8 +53,10 @@ public class GerenciadorDeDados {
         return new Mensagem(Mensageiro.codificar(participacoes));
       } else if (t == Administrador.class) {
         return new Mensagem(Mensageiro.codificar(administradores));
+      } else if (t == Aula.class) {
+        return new Mensagem(Mensageiro.codificar(aulas));
       }
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("GerenciadorDeDados.listar: Classe desconhecida");
     }
 
     public static Mensagem matricular(HashSet<Integer> idAlunos, String idDisciplina) {

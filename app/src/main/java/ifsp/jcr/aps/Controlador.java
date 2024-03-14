@@ -9,7 +9,7 @@ public class Controlador {
       case INCLUIR -> GerenciadorDeDados.inserir(Mensageiro.decodificar(mensagem.obterCorpo()));
       case LISTAR -> GerenciadorDeDados.listar(Mensageiro.decodificar(mensagem.obterCorpo()));
       case MATRICULAR -> GerenciadorDeDados.matricular(mensagem.obterIds(), mensagem.obterCorpo());
-      default -> null;
+      default -> throw new IllegalArgumentException("Operação não suportada");
     };
   }
 }

@@ -1,8 +1,9 @@
 package ifsp.jcr.aps;
 
 import java.io.Serial;
+import java.io.Serializable;
 
-class Curso {
+class Curso implements Serializable {
   private Integer id;
   private String nome;
   private String descricao;

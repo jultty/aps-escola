@@ -1,17 +1,17 @@
 package ifsp.jcr.aps;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 
 public class Aula implements Serializable {
-  Integer id;
-  Date data;
-  Integer idDisciplina;
-  HashSet<Integer> presencas;
+  private Integer id;
+  private LocalDate data;
+  private Integer idDisciplina;
+  private HashSet<Integer> presencas;
 
-  public Aula(Integer id, Date data, Integer idDisciplina, HashSet<Integer> presencas) {
+  public Aula(Integer id, LocalDate data, Integer idDisciplina, HashSet<Integer> presencas) {
     this.id = id;
     this.data = data;
     this.idDisciplina = idDisciplina;
@@ -19,7 +19,7 @@ public class Aula implements Serializable {
   }
 
   public Integer obterId() { return id; }
-  public Date obterData() { return data; }
+  public LocalDate obterData() { return data; }
   public Integer obterIdDisciplina() { return idDisciplina; }
   public HashSet<Integer> obterPresencas() { return presencas; }
 
