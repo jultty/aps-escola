@@ -23,16 +23,16 @@ class TestesAluno {
   void  alunoComMediaIgualOuMaiorQue6EstaAprovadonNoCriterio() throws IOException, ClassNotFoundException {
 
     Mensagem respostaListagem = Controlador.solicitar(
-      new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aluno.class))
+      new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aluno.class))
     );
-    HashMap<Integer, Aluno> alunos = Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
+    HashMap<Integer, Aluno> alunos = Serializador.desserializarVarios(respostaListagem.obterCorpo());
 
     Aluno carolina = alunos.get(808);
 
     Mensagem respostaListagemParticipacoes = Controlador.solicitar(
-      new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Participacao.class))
+      new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Participacao.class))
     );
-    Map<Integer, Participacao> participacoes = Mensageiro.decodificarVarias(respostaListagemParticipacoes.obterCorpo());
+    Map<Integer, Participacao> participacoes = Serializador.desserializarVarios(respostaListagemParticipacoes.obterCorpo());
 
     HashMap<Integer, Participacao> participacaoCarolina = new HashMap<>();
 
@@ -58,15 +58,15 @@ class TestesAluno {
     );
 
     Mensagem respostaInclusao = Controlador.solicitar(new Mensagem(
-        OPERACAO.INCLUIR, Mensageiro.codificar(participacao)
+        OPERACAO.INCLUIR, Serializador.serializar(participacao)
     ));
 
     Mensagem respostaListagem = Controlador.solicitar(new Mensagem(
-        OPERACAO.LISTAR, Mensageiro.codificar(Participacao.class)
+        OPERACAO.LISTAR, Serializador.serializar(Participacao.class)
     ));
 
     HashMap<Integer, Participacao> participacoes =
-        Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
+        Serializador.desserializarVarios(respostaListagem.obterCorpo());
 
     Participacao participacaoRetornada = participacoes.get(900087);
 
@@ -78,17 +78,17 @@ class TestesAluno {
   void alunoComFrequenciaSuperiorA075EstaAprovadoNoCriterio() throws IOException, ClassNotFoundException {
 
     Mensagem respostaListagem = Controlador.solicitar(new Mensagem(
-        OPERACAO.LISTAR, Mensageiro.codificar(Participacao.class)
+        OPERACAO.LISTAR, Serializador.serializar(Participacao.class)
     ));
 
     HashMap<Integer, Participacao> participacoes =
-        Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
+        Serializador.desserializarVarios(respostaListagem.obterCorpo());
 
     Mensagem respostaListagemAulas = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aula.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aula.class))
     );
 
-    HashMap<Integer, Aula> aulas = Mensageiro.decodificarVarias(respostaListagemAulas.obterCorpo());
+    HashMap<Integer, Aula> aulas = Serializador.desserializarVarios(respostaListagemAulas.obterCorpo());
 
     Participacao participacao = participacoes.get(900087);
 
@@ -100,17 +100,17 @@ class TestesAluno {
   void alunoComFrequenciaInferiorA075EstaReprovadoNoCriterio() throws IOException, ClassNotFoundException {
 
     Mensagem respostaListagem = Controlador.solicitar(new Mensagem(
-        OPERACAO.LISTAR, Mensageiro.codificar(Participacao.class)
+        OPERACAO.LISTAR, Serializador.serializar(Participacao.class)
     ));
 
     HashMap<Integer, Participacao> participacoes =
-        Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
+        Serializador.desserializarVarios(respostaListagem.obterCorpo());
 
     Mensagem respostaListagemAulas = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aula.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aula.class))
     );
 
-    HashMap<Integer, Aula> aulas = Mensageiro.decodificarVarias(respostaListagemAulas.obterCorpo());
+    HashMap<Integer, Aula> aulas = Serializador.desserializarVarios(respostaListagemAulas.obterCorpo());
 
     Participacao participacao = participacoes.get(970013);
 
@@ -124,16 +124,16 @@ class TestesAluno {
     Aula aula770016 = new Aula(770016, LocalDate.now(), 38, presencas);
     Aula aula770017 = new Aula(770017, LocalDate.now(), 38, presencas);
 
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula770014)));
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula770015)));
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula770016)));
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula770017)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula770014)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula770015)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula770016)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula770017)));
 
     Mensagem respostaListagemAulasAposInsercoes = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aula.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aula.class))
     );
 
-    HashMap<Integer, Aula> aulasAposInsercoes = Mensageiro.decodificarVarias(
+    HashMap<Integer, Aula> aulasAposInsercoes = Serializador.desserializarVarios(
       respostaListagemAulasAposInsercoes.obterCorpo()
     );
 
@@ -144,16 +144,16 @@ class TestesAluno {
   void alunoComFrequenciaInferiora075EMediaSuperiorA6EstaReprovado() throws IOException, ClassNotFoundException {
 
     Mensagem respostaListagemParticipacoes = Controlador.solicitar(new Mensagem(
-        OPERACAO.LISTAR, Mensageiro.codificar(Participacao.class)
+        OPERACAO.LISTAR, Serializador.serializar(Participacao.class)
     ));
 
     HashMap<Integer, Participacao> participacoes =
-        Mensageiro.decodificarVarias(respostaListagemParticipacoes.obterCorpo());
+        Serializador.desserializarVarios(respostaListagemParticipacoes.obterCorpo());
 
     Mensagem respostaListagemAulas = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aula.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aula.class))
     );
-    HashMap<Integer, Aula> aulas = Mensageiro.decodificarVarias(
+    HashMap<Integer, Aula> aulas = Serializador.desserializarVarios(
         respostaListagemAulas.obterCorpo()
     );
 
@@ -170,7 +170,7 @@ class TestesAluno {
 
     Aluno fernanda = new Aluno(807,"Fernanda");
     Mensagem respostaInclusao = Controlador.solicitar(
-        new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(fernanda))
+        new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(fernanda))
     );
     assertEquals(respostaInclusao.obterCorpo(), "OK");
 
@@ -181,10 +181,10 @@ class TestesAluno {
     Aula aula772807 = new Aula(772807, LocalDate.now(), 40, presencas);
     Aula aula773807 = new Aula(773807, LocalDate.now(), 40, presencas);
 
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula770807)));
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula771807)));
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula772807)));
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula773807)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula770807)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula771807)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula772807)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula773807)));
 
     HashMap<String, Float> notas = new HashMap<>();
     notas.put("P1", 6.0F);
@@ -193,20 +193,20 @@ class TestesAluno {
         970807, 807, 40, notas
     );
 
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(participacao)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(participacao)));
 
     Mensagem respostaListagemParticipacoes = Controlador.solicitar(new Mensagem(
-        OPERACAO.LISTAR, Mensageiro.codificar(Participacao.class)
+        OPERACAO.LISTAR, Serializador.serializar(Participacao.class)
     ));
 
     HashMap<Integer, Participacao> participacoes =
-        Mensageiro.decodificarVarias(respostaListagemParticipacoes.obterCorpo());
+        Serializador.desserializarVarios(respostaListagemParticipacoes.obterCorpo());
 
     Mensagem respostaListagemAulas = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aula.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aula.class))
     );
 
-    HashMap<Integer, Aula> aulas = Mensageiro.decodificarVarias(
+    HashMap<Integer, Aula> aulas = Serializador.desserializarVarios(
         respostaListagemAulas.obterCorpo()
     );
 
@@ -222,7 +222,7 @@ class TestesAluno {
 
     Aluno cleo = new Aluno(804,"Cleo");
     Mensagem respostaInclusao = Controlador.solicitar(
-        new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(cleo))
+        new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(cleo))
     );
     assertEquals(respostaInclusao.obterCorpo(), "OK");
 
@@ -233,10 +233,10 @@ class TestesAluno {
     Aula aula772804 = new Aula(772804, LocalDate.now(), 90, presencas);
     Aula aula773804 = new Aula(773804, LocalDate.now(), 90, presencas);
 
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula770804)));
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula771804)));
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula772804)));
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula773804)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula770804)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula771804)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula772804)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula773804)));
 
     HashMap<String, Float> notas = new HashMap<>();
     notas.put("P1", 10.0F);
@@ -246,20 +246,20 @@ class TestesAluno {
         970804, 804, 90, notas
     );
 
-    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(participacao)));
+    Controlador.solicitar(new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(participacao)));
 
     Mensagem respostaListagemParticipacoes = Controlador.solicitar(new Mensagem(
-        OPERACAO.LISTAR, Mensageiro.codificar(Participacao.class)
+        OPERACAO.LISTAR, Serializador.serializar(Participacao.class)
     ));
 
     HashMap<Integer, Participacao> participacoes =
-        Mensageiro.decodificarVarias(respostaListagemParticipacoes.obterCorpo());
+        Serializador.desserializarVarios(respostaListagemParticipacoes.obterCorpo());
 
     Mensagem respostaListagemAulas = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aula.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aula.class))
     );
 
-    HashMap<Integer, Aula> aulas = Mensageiro.decodificarVarias(
+    HashMap<Integer, Aula> aulas = Serializador.desserializarVarios(
         respostaListagemAulas.obterCorpo()
     );
 

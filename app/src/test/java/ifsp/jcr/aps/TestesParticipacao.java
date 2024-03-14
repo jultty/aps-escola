@@ -16,10 +16,10 @@ class TestesParticipacao {
   @Test
   void dadosPersistemEntreClassesDeTestes() throws IOException, ClassNotFoundException {
     Mensagem resposta = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aluno.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aluno.class))
     );
     HashMap<Integer, Aluno> alunos =
-        Mensageiro.decodificarVarias(resposta.obterCorpo());
+        Serializador.desserializarVarios(resposta.obterCorpo());
     assertTrue(alunos.containsKey(808));
     assertTrue(alunos.containsKey(801));
     assertTrue(alunos.get(808).obterIdDisciplinas().contains(38));
@@ -38,23 +38,23 @@ class TestesParticipacao {
     Aula aula = new Aula(770013, LocalDate.now(), 38, presencas);
 
     Mensagem respostaInsercao = Controlador.solicitar(
-        new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(aula))
+        new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(aula))
     );
     assertEquals(respostaInsercao.obterCorpo(), "OK");
 
     Mensagem respostaListagem = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aula.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aula.class))
     );
 
-    HashMap<Integer, Aula> aulas = Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
+    HashMap<Integer, Aula> aulas = Serializador.desserializarVarios(respostaListagem.obterCorpo());
     HashSet<Integer> presencasRetornadas = aulas.get(770013).obterPresencas();
     assertTrue(presencasRetornadas.contains(808));
     assertTrue(presencasRetornadas.contains(801));
 
     Mensagem respostaListagemAlunos = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aluno.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aluno.class))
     );
-    HashMap<Integer, Aluno> alunos = Mensageiro.decodificarVarias(respostaListagemAlunos.obterCorpo());
+    HashMap<Integer, Aluno> alunos = Serializador.desserializarVarios(respostaListagemAlunos.obterCorpo());
 
     String frase = "A aula 770013 de " + aulas.get(770013).obterData() + " teve a presença das alunas " +
         alunos.get(808).obterNome() + " (id 808) e " + alunos.get(801).obterNome() + " (id 801)";
@@ -79,15 +79,15 @@ class TestesParticipacao {
     );
 
     Mensagem respostaInclusao = Controlador.solicitar(new Mensagem(
-        OPERACAO.INCLUIR, Mensageiro.codificar(participacao)
+        OPERACAO.INCLUIR, Serializador.serializar(participacao)
     ));
 
     Mensagem respostaListagem = Controlador.solicitar(new Mensagem(
-        OPERACAO.LISTAR, Mensageiro.codificar(Participacao.class)
+        OPERACAO.LISTAR, Serializador.serializar(Participacao.class)
     ));
 
     HashMap<Integer, Participacao> participacoes =
-        Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
+        Serializador.desserializarVarios(respostaListagem.obterCorpo());
 
     Participacao participacaoRetornada = participacoes.get(970013);
 

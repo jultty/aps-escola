@@ -24,21 +24,21 @@ class TestesTurma {
   void formarUmaTurma() throws IOException, ClassNotFoundException {
 
     Mensagem resposta1 = Controlador.solicitar(
-        new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(turma1))
+        new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(turma1))
     );
     Mensagem resposta2 = Controlador.solicitar(
-        new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(turma2))
+        new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(turma2))
     );
 
     assertEquals(resposta1.obterCorpo(), "OK");
     assertEquals(resposta2.obterCorpo(), "OK");
 
     Mensagem respostaListagem = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Turma.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Turma.class))
     );
 
     HashMap<Integer, Turma> listaDeTurmas =
-        Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
+        Serializador.desserializarVarios(respostaListagem.obterCorpo());
 
     assertNotNull(listaDeTurmas);
     assertTrue(listaDeTurmas.containsKey(turma1.obterId()));
@@ -48,8 +48,8 @@ class TestesTurma {
   @Test @Order(2)
   void umaTurmaPersisteEntreTestes() throws IOException, ClassNotFoundException {
     Mensagem resposta = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Turma.class)));
-    HashMap<Integer, Turma> listaDeTurmas = Mensageiro.decodificarVarias(resposta.obterCorpo());
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Turma.class)));
+    HashMap<Integer, Turma> listaDeTurmas = Serializador.desserializarVarios(resposta.obterCorpo());
     assertNotNull(listaDeTurmas);
     assertTrue(listaDeTurmas.containsKey(turma1.obterId()));
     assertTrue(listaDeTurmas.containsKey(turma2.obterId()));
@@ -57,8 +57,8 @@ class TestesTurma {
 
   @Test @Order(3)
   void turmasRecebidasPorListagemSaoIguaisAsTurmasCriadas() throws IOException, ClassNotFoundException {
-    Mensagem resposta = Controlador.solicitar(new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Turma.class)));
-    HashMap<Integer, Turma> listaDeTurmas = Mensageiro.decodificarVarias(resposta.obterCorpo());
+    Mensagem resposta = Controlador.solicitar(new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Turma.class)));
+    HashMap<Integer, Turma> listaDeTurmas = Serializador.desserializarVarios(resposta.obterCorpo());
     assertNotNull(listaDeTurmas);
     assertTrue(listaDeTurmas.containsKey(turma1.obterId()));
     assertTrue(listaDeTurmas.containsKey(turma2.obterId()));
@@ -71,14 +71,14 @@ class TestesTurma {
 
     Aluno carolina = new Aluno(808,"Carolina");
     Mensagem resposta1 = Controlador.solicitar(
-        new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(carolina))
+        new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(carolina))
     );
     assertEquals(resposta1.obterCorpo(), "OK");
     assertEquals(carolina.obterIdDisciplinas().size(), 0);
 
     Aluno mariana = new Aluno(801, "Mariana");
     Mensagem resposta2 = Controlador.solicitar(
-        new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(mariana))
+        new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(mariana))
     );
     assertEquals(resposta2.obterCorpo(), "OK");
     assertEquals(mariana.obterIdDisciplinas().size(), 0);
@@ -86,7 +86,7 @@ class TestesTurma {
     Disciplina disciplina =
         new Disciplina(38, "APSI5", "Arquitetura e Programação de Software");
     Mensagem resposta3 = Controlador.solicitar(
-        new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(disciplina))
+        new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(disciplina))
     );
 
     HashSet<Integer> idAlunas = new HashSet<>();
@@ -99,10 +99,10 @@ class TestesTurma {
     assertEquals(resposta4.obterCorpo(), "OK");
 
     Mensagem resposta5 = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aluno.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aluno.class))
     );
     HashMap<Integer, Aluno> alunos =
-        Mensageiro.decodificarVarias(resposta5.obterCorpo());
+        Serializador.desserializarVarios(resposta5.obterCorpo());
     assertTrue(alunos.containsKey(carolina.obterId()));
     assertTrue(alunos.containsKey(mariana.obterId()));
     assertTrue(alunos.get(carolina.obterId()).obterIdDisciplinas().contains(38));
@@ -116,21 +116,21 @@ class TestesTurma {
     idDisciplinas.add(38);
     Professor rediet = new Professor(10, idDisciplinas, "Rediet Abebe");
     Mensagem resposta = Controlador.solicitar(
-        new Mensagem(OPERACAO.INCLUIR, Mensageiro.codificar(rediet))
+        new Mensagem(OPERACAO.INCLUIR, Serializador.serializar(rediet))
     );
     assertEquals(resposta.obterCorpo(), "OK");
 
     Mensagem resposta2 = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Professor.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Professor.class))
     );
     HashMap<Integer, Professor> professores =
-        Mensageiro.decodificarVarias(resposta2.obterCorpo());
+        Serializador.desserializarVarios(resposta2.obterCorpo());
     assertTrue(professores.containsKey(rediet.obterId()));
 
     Mensagem respostaListarTurmas = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Turma.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Turma.class))
     );
-    HashMap<Integer, Turma> turmas = Mensageiro.decodificarVarias(
+    HashMap<Integer, Turma> turmas = Serializador.desserializarVarios(
         respostaListarTurmas.obterCorpo()
     );
     assertTrue(turmas.containsKey(turma1.obterId()));
@@ -138,10 +138,10 @@ class TestesTurma {
     Turma turma1Retornada = turmas.get(turma1.obterId());
 
     Mensagem respostaListarProfessores = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Professor.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Professor.class))
     );
 
-    HashMap<Integer, Professor> professoresRetornados = Mensageiro.decodificarVarias(
+    HashMap<Integer, Professor> professoresRetornados = Serializador.desserializarVarios(
         respostaListarProfessores.obterCorpo()
     );
 
@@ -149,9 +149,9 @@ class TestesTurma {
     Professor professorRetornado = professoresRetornados.get(10);
 
     Mensagem respostaListarAlunos = Controlador.solicitar(
-        new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Aluno.class))
+        new Mensagem(OPERACAO.LISTAR, Serializador.serializar(Aluno.class))
     );
-    HashMap<Integer, Aluno> alunos = Mensageiro.decodificarVarias(
+    HashMap<Integer, Aluno> alunos = Serializador.desserializarVarios(
         respostaListarAlunos.obterCorpo()
     );
 

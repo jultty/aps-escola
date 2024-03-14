@@ -32,11 +32,9 @@ public class Mensagem {
     this.corpo = corpo;
   }
 
-  OPERACAO obterOperacao() {
-    return operacao;
-  }
-  String obterCorpo() {
+  public OPERACAO obterOperacao() { return operacao; }
+  public String obterCorpo() {
     return corpo;
   }
-  HashSet<Integer> obterIds() { return ids; }
+  public HashSet<Integer> obterIds() { return ids; }
 }

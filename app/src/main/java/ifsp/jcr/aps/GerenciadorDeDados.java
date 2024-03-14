@@ -40,21 +40,21 @@ public class GerenciadorDeDados {
 
     public static <T> Mensagem listar(T t) throws IOException {
       if (t == Turma.class) {
-        return new Mensagem(Mensageiro.codificar(turmas));
+        return new Mensagem(Serializador.serializar(turmas));
       } else if (t == Professor.class) {
-        return new Mensagem(Mensageiro.codificar(professores));
+        return new Mensagem(Serializador.serializar(professores));
       } else if (t == Aluno.class) {
-        return new Mensagem(Mensageiro.codificar(alunos));
+        return new Mensagem(Serializador.serializar(alunos));
       } else if (t == Disciplina.class) {
-        return new Mensagem(Mensageiro.codificar(disciplinas));
+        return new Mensagem(Serializador.serializar(disciplinas));
       } else if (t == Curso.class) {
-        return new Mensagem(Mensageiro.codificar(cursos));
+        return new Mensagem(Serializador.serializar(cursos));
       } else if (t == Participacao.class) {
-        return new Mensagem(Mensageiro.codificar(participacoes));
+        return new Mensagem(Serializador.serializar(participacoes));
       } else if (t == Administrador.class) {
-        return new Mensagem(Mensageiro.codificar(administradores));
+        return new Mensagem(Serializador.serializar(administradores));
       } else if (t == Aula.class) {
-        return new Mensagem(Mensageiro.codificar(aulas));
+        return new Mensagem(Serializador.serializar(aulas));
       }
       throw new IllegalArgumentException("GerenciadorDeDados.listar: Classe desconhecida");
     }
