@@ -18,7 +18,7 @@ class TestesTurma {
 
   Integer[] idAlunos = { 425, 480, 412 };
   Turma turma1 = new Turma(101, "2024.1", 38, 10, idAlunos);
-  Turma turma2 = new Turma(102, "2023.1", 31, 12, idAlunos);
+  Turma turma2 = new Turma(102, "2024.1", 31, 12, idAlunos);
 
   @Test @Order(1)
   void formarUmaTurma() throws IOException, ClassNotFoundException {
@@ -41,7 +41,6 @@ class TestesTurma {
         Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
 
     assertNotNull(listaDeTurmas);
-    listaDeTurmas.forEach((k, v) -> System.out.println(v.obterId()));
     assertTrue(listaDeTurmas.containsKey(turma1.obterId()));
     assertTrue(listaDeTurmas.containsKey(turma2.obterId()));
   }
@@ -52,12 +51,8 @@ class TestesTurma {
         new Mensagem(OPERACAO.LISTAR, Mensageiro.codificar(Turma.class)));
     HashMap<Integer, Turma> listaDeTurmas = Mensageiro.decodificarVarias(resposta.obterCorpo());
     assertNotNull(listaDeTurmas);
-    listaDeTurmas.forEach((k, v) -> System.out.println(v.obterId()));
     assertTrue(listaDeTurmas.containsKey(turma1.obterId()));
     assertTrue(listaDeTurmas.containsKey(turma2.obterId()));
-    System.out.println(turma2.obterIdAlunos()[0]);
-    System.out.println(turma2.obterIdAlunos()[1]);
-    System.out.println(turma2.obterIdAlunos()[2]);
   }
 
   @Test @Order(3)
