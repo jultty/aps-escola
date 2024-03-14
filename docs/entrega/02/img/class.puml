@@ -1,0 +1,188 @@
+@startuml
+class ifsp.jcr.aps.Aluno {
+- Integer id
+- String nome
+- HashSet<Integer> idDisciplinas
+- {static} long serialVersionUID
++ void matricular(Integer)
++ Integer obterId()
++ String obterNome()
++ HashSet<Integer> obterIdDisciplinas()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class ifsp.jcr.aps.Participacao {
+- Integer id
+- Integer idAluno
+- Integer idDisciplina
+- HashMap<String,Float> notas
+- Float pontuacao
+- Float media
+- Float presencas
+- Float aulas
+- Float frequencia
+- {static} long serialVersionUID
++ Boolean avaliarMedia()
++ Boolean avaliarFrequencia(HashMap<Integer,Aula>)
++ Boolean avaliarAprovacao(HashMap<Integer,Aula>)
++ Integer obterId()
++ Integer obterIdAluno()
++ Integer obterIdDisciplina()
++ HashMap<String,Float> obterNotas()
++ Float obterFrequencia()
++ Float obterPontuacao()
++ Float obterMedia()
++ Float obterPresencas()
++ Float obterAulas()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class ifsp.jcr.aps.Administrador {
+~ Integer id
+}
+
+class ifsp.jcr.aps.App {
++ {static} void main(String[])
+}
+
+class ifsp.jcr.aps.Professor {
+- Integer id
+- String nome
+- HashSet<Integer> idTurmas
+- {static} long serialVersionUID
++ Integer obterId()
++ HashSet<Integer> obterIdTurmas()
++ String obterNome()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class ifsp.jcr.aps.Turma {
+- Integer id
+- String semestre
+- Integer idDisciplina
+- Integer idProfessor
+- Integer[] idAlunos
+- {static} long serialVersionUID
++ Integer obterId()
++ Integer[] obterIdAlunos()
++ Integer obterIdProfessor()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class ifsp.jcr.aps.Aula {
+- Integer id
+- LocalDate data
+- Integer idDisciplina
+- HashSet<Integer> presencas
++ Integer obterId()
++ LocalDate obterData()
++ Integer obterIdDisciplina()
++ HashSet<Integer> obterPresencas()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class ifsp.jcr.aps.GerenciadorDeDados {
+- {static} HashMap<Integer,Curso> cursos
+- {static} HashMap<Integer,Professor> professores
+- {static} HashMap<Integer,Disciplina> disciplinas
+- {static} HashMap<Integer,Turma> turmas
+- {static} HashMap<Integer,Aluno> alunos
+- {static} HashMap<Integer,Participacao> participacoes
+- {static} HashMap<Integer,Administrador> administradores
+- {static} HashMap<Integer,Aula> aulas
++ {static} Mensagem inserir(T)
++ {static} Mensagem listar(T)
++ {static} Mensagem matricular(HashSet<Integer>,String)
+}
+
+
+class ifsp.jcr.aps.Mensageiro {
+~ {static} String codificar(Serializable)
+~ {static} Object decodificar(String)
++ {static} HashMap<Integer,T> decodificarVarias(String)
+}
+
+class ifsp.jcr.aps.ServicoSeguranca {
++ Boolean autenticar(Mensagem)
++ Boolean autorizar(Mensagem)
+- String gerarToken(Mensagem)
+}
+
+class ifsp.jcr.aps.Controlador {
++ {static} Mensagem solicitar(Mensagem)
+}
+
+class ifsp.jcr.aps.InterfaceUsuario {
++ String login(Mensagem)
++ Boolean logout(String)
++ Mensagem solicitarTela(Mensagem)
++ void exibirTela(Mensagem)
+}
+
+class ifsp.jcr.aps.Mensagem {
+- String token
+- OPERACAO operacao
+- HashSet<Integer> ids
+- String corpo
+~ OPERACAO obterOperacao()
+~ String obterCorpo()
+~ HashSet<Integer> obterIds()
+}
+
+
+enum ifsp.jcr.aps.OPERACAO {
++  INCLUIR
++  LISTAR
++  MATRICULAR
++  BUSCAR
++  EDITAR
++  APAGAR
++  RESPONDER
+}
+
+class ifsp.jcr.aps.Disciplina {
+- Integer id
+- String nome
+- String descricao
+- {static} long serialVersionUID
++ Integer obterId()
++ String obterNome()
++ String obterDescricao()
++ boolean equals(Object)
++ int hashCode()
+}
+
+
+class ifsp.jcr.aps.Curso {
+- Integer id
+- String nome
+- String descricao
+- Integer[] idDisciplinas
+- {static} long serialVersionUID
++ Integer obterId()
++ String obterNome()
++ String obterDescricao()
++ Integer[] obterIdDisciplinas()
+}
+
+
+
+
+java.io.Serializable <|.. ifsp.jcr.aps.Aluno
+java.io.Serializable <|.. ifsp.jcr.aps.Participacao
+java.io.Serializable <|.. ifsp.jcr.aps.Professor
+java.io.Serializable <|.. ifsp.jcr.aps.Turma
+java.io.Serializable <|.. ifsp.jcr.aps.Aula
+java.io.Serializable <|.. ifsp.jcr.aps.Disciplina
+java.io.Serializable <|.. ifsp.jcr.aps.Curso
+@enduml

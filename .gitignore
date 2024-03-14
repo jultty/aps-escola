@@ -6,3 +6,4 @@ kls_database.db
 .project
 *.class
 .classpath
+*.bkp
