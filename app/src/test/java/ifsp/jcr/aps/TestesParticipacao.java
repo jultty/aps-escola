@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Order(2)
@@ -29,8 +30,21 @@ class TestesParticipacao {
 
     HashMap<String, Float> notas = new HashMap<>();
     Participacao participacao = new Participacao(
-        808, 38, notas, 3.8F
+        970013, 808, 38, notas, 3.8F
     );
+
+    Mensagem respostaInclusao = Controlador.solicitar(new Mensagem(
+        OPERACAO.INCLUIR, Mensageiro.codificar(participacao)
+    ));
+
+    Mensagem respostaListagem = Controlador.solicitar(new Mensagem(
+        OPERACAO.LISTAR, Mensageiro.codificar(Participacao.class)
+    ));
+
+    HashMap<Integer, Participacao> participacoes =
+        Mensageiro.decodificarVarias(respostaListagem.obterCorpo());
+
+    assertNotNull(participacoes.get(970013));
   }
 
 //  2.2. Registrar em cada aula

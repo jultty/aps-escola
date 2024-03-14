@@ -12,7 +12,8 @@ class Participacao implements Serializable {
   private HashMap<String, Float> notas;
   private Float frequencia;
 
-  public Participacao(Integer idAluno, Integer idDisciplina, HashMap<String, Float> notas, Float frequencia) {
+  public Participacao(Integer id, Integer idAluno, Integer idDisciplina, HashMap<String, Float> notas, Float frequencia) {
+    this.id = id;
     this.idAluno = idAluno;
     this.idDisciplina = idDisciplina;
     this.notas = notas;
@@ -30,12 +31,12 @@ class Participacao implements Serializable {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Participacao that = (Participacao) o;
-    return Objects.equals(idAluno, that.idAluno) && Objects.equals(idDisciplina, that.idDisciplina) && Objects.equals(notas, that.notas) && Objects.equals(frequencia, that.frequencia);
+    return Objects.equals(id, that.id) && Objects.equals(idAluno, that.idAluno) && Objects.equals(idDisciplina, that.idDisciplina) && Objects.equals(notas, that.notas) && Objects.equals(frequencia, that.frequencia);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(idAluno, idDisciplina, notas, frequencia);
+    return Objects.hash(id, idAluno, idDisciplina, notas, frequencia);
   }
 
   @Serial
