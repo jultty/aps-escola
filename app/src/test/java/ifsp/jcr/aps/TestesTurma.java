@@ -9,15 +9,16 @@ import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//  1. Formar uma turma, ou seja
-//     - 1.1. relacionar um professor com uma disciplina
-//     - 1.2. e com um conjunto de alunos
+@Order(1)
+class TestesTurma {
 
-class AppTest {
+  //  2.1. Formar uma turma, ou seja
+  //     - 2.1.1. relacionar um professor com uma disciplina
+  //     - 2.1.2. e com um conjunto de alunos
 
   Integer[] idAlunos = { 425, 480, 412 };
   Turma turma1 = new Turma(101, "2024.1", 38, 10, idAlunos);
-  Turma turma2 = new Turma(102, "2024.1", 31, 12, idAlunos);
+  Turma turma2 = new Turma(102, "2023.1", 31, 12, idAlunos);
 
   @Test @Order(1)
   void formarUmaTurma() throws IOException, ClassNotFoundException {
@@ -66,9 +67,8 @@ class AppTest {
     assertNotNull(listaDeTurmas);
     assertTrue(listaDeTurmas.containsKey(turma1.obterId()));
     assertTrue(listaDeTurmas.containsKey(turma2.obterId()));
-    assertEquals(listaDeTurmas.size(), 2);
-    assertEquals(listaDeTurmas.get(turma1.obterId()).obterIdProfessor(), turma1.obterIdProfessor());
-    assertEquals(listaDeTurmas.get(turma2.obterId()).obterIdProfessor(), turma2.obterIdProfessor());
+    assertEquals(listaDeTurmas.get(turma1.obterId()), turma1);
+    assertEquals(listaDeTurmas.get(turma2.obterId()), turma2);
   }
 
   @Test @Order(4)
