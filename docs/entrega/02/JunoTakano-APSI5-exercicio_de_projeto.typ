@@ -24,30 +24,26 @@
 
 #gen_doc(properties: meta)[
 
-  #fig("img/escola.drawio.png", "Diagrama geral da arquitetura final.")
+  #fig("img/class_200-light.drawio.png", "Diagrama de classes da arquitetura final.")
 
-  Como todas as estruturas já utilizavam IDs desde a proposta original, optei por desacoplar grande parte delas e centralizar as dependências no gerenciador de dados, que já concentrava ligações com quase todas elas.
+  A implementação final do trabalho seguiu o projeto inicial, aproveitando as estruturas originais já possuírem IDs. A escolha arquitetural buscou desacoplar as entidades e centralizar sua persistência na classe estática `GerenciadorDeDados`, concentrando assim as dependências em um lugar onde podem ser melhor aproveitadas.
 
-  Desta forma, foi possível colocar o comportamento das classes no gerenciador de dados, deixando com que as entidades individuais se concentrem em definir as suas estruturas de dados.
+ Com exceção de apenas duas entidades, `Aluno` e `Participação`, todo o comportamento foi extraído para fora das camadas mais internas da aplicação. Um controlador foi adicionado, que através de técnicas de serialização e desserialização, providas por uma classe utilitária `Serializador`, permitem receber e enviar objetos para serem manipulados externamente à aplicação.
 
-  Foi adicionada uma classe `Mensagem`, que é usada para transferir dados entre as classes, desde a interface até o gerenciador de dados, como quais são as operações, seus dados de entrada, e seus retornos.
+  Estas solicitações são encapsuladas em instâncias da classe `Mensagem`, que possui atributos para transportar entidades serializadas como _strings_ (`corpo`) e um atributo tipado através do _enum_ `OPERACAO`, que permite ao controlador identificar se trata-se de uma operação de inclusão ou de listagem.
 
-  A arquitetura final poderia ser melhorada afastando um pouco mais as alterações no estado da aplicação de onde os dados são de fatos armazenados, alocando-as, por exemplo, no controlador.
+  Quando o controlador recebe uma nova solicitação, ele utiliza esta enumeração para saber qual método estático do gerenciador de dados chamar: `listar` ou `incluir`.
 
-  O modelo buscou minimizar as dependências entre as classes e otimizar o fluxo de dados, com especial atenção aos pontos de contato cada vez mais externos até a interface de usuário.
+  O `GerenciadorDeDados`, assim como o `Serializador`, utiliza tipos genéricos para evitar a criação de muitos métodos sobrecarregados, cada um específico para cada classe.
 
-  Outras mudanças menores realizadas foram:
+  Através desta técnica, foi possível realizar todas as operações de escrita e leitura, para todas as entidades, a partir de um único método. Isto foi especialmente interessante dado que a lógica aplicada é praticamente idêntica para todos eles.
 
-  - Nomes de métodos foram uniformizados para serem verbos
-  - A lógica de _login_ e _logout_ foi colocada entre o controlador e o gerenciador de dados, ao invés das classes originais, mediando melhor a ponte entre os dados e a interface externa.
+  Cabe ressaltar que o uso de tipos genéricos na classe `Serializador` não é totalmente seguro em termos de segurança de tipos, apesar de serem feitas três verificações aninhadas antes de realizar a conversão final, do tipo desconhecido para o `HashMap` correspondente ao tipo recebido como parâmetro.
+
+  O modelo buscou minimizar as dependências entre as classes e otimizar o fluxo de dados, com especial atenção aos pontos de contato cada vez mais externos até a interface de usuário, levando para fora da camada interna da aplicação a manipulação das informações.
+
+  O código acompanha um conjunto de testes automatizados, configurados para serem executados em sequência. Através do envio de mensagens pelo controlador, eles criam entidades no `GerenciadorDeDados` e verificam se as entidades retornadas ao listar o que foi armazenado correspondem à informação esperada.
+
+  Anexo a este trabalho estão os arquivos contendo o código fonte, também disponível #link("https://github.com/jultty/aps-escola")[online], e um relatório em HTML da execução do conjunto de testes.
 
 ]
-- Como todas as estruturas já utilizam IDs, é possível desacoplar grande parte delas e centralizar as dependências no gerenciador de dados, que já concentra essas dependências de toda forma
-- Métodos uniformizados para serem verbos
-- Administrador interage apenas com GerenciadorDados
-- professor deixa de ter dependência com Aluno
-    - listaAlunosPorTurma() deve pedir alunos ao gerenciador
-        - gerenciador retorna alunos pelo id da turmao
-
- - Lógica de login e logout fica entre o contrololador e o GerenciadorDeDados
- - As operações possíveis são concentradas na classe Requisicao, que serao implementadas de acordo na classe GerenciadorDeDados para serem retornadas à interface
