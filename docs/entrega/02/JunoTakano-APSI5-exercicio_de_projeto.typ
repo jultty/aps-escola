@@ -44,6 +44,6 @@
 
   O código acompanha um conjunto de testes automatizados, configurados para serem executados em sequência. Através do envio de mensagens pelo controlador, eles criam entidades no `GerenciadorDeDados` e verificam se as entidades retornadas ao listar o que foi armazenado correspondem à informação esperada.
 
-  Anexo a este trabalho estão os arquivos contendo o código fonte, também disponível #link("https://github.com/jultty/aps-escola")[online], e um relatório em HTML da execução do conjunto de testes.
+  Anexos a este trabalho estão os arquivos contendo o código fonte, também disponível #link("https://github.com/jultty/aps-escola")[online], e um relatório em HTML da execução do conjunto de testes.
 
 ]
