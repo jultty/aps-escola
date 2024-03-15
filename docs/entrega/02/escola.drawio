@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-03-15T01:17:47.411Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.276 Electron/28.2.2 Safari/537.36" etag="omTTlRC-rnZE6_HoyRpQ" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-03-15T01:33:06.885Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.276 Electron/28.2.2 Safari/537.36" etag="o0JBhXIXMK-4nl4NjOz5" version="23.1.5" type="device">
   <diagram name="Página-1" id="evqLYOdlQefZDWV36I06">
-    <mxGraphModel dx="2587" dy="2455" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2676" dy="2498" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -347,7 +347,7 @@
             <mxPoint x="348" y="-1089" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Co9PbLlmfqyVWT2DBjAQ-44" value="&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;/blockquote&gt;&lt;span style=&quot;background-color: initial; font-size: 10px;&quot;&gt;&lt;div style=&quot;&quot;&gt;Usa tipos genéricos para não precisar de uma quantidade enorme de métodos sobrecarregados.&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;A classe GerenciadorDeDados também faz usso desta técnica.&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;/span&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;/blockquote&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=middle;align=center;perimeterSpacing=5;spacing=13;" parent="1" vertex="1">
+        <mxCell id="Co9PbLlmfqyVWT2DBjAQ-44" value="&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;/blockquote&gt;&lt;span style=&quot;background-color: initial; font-size: 10px;&quot;&gt;&lt;div style=&quot;&quot;&gt;Usa tipos genéricos para não precisar de uma quantidade enorme de métodos sobrecarregados.&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;A classe GerenciadorDeDados também faz uso desta técnica.&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;/span&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;/blockquote&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=25;verticalAlign=middle;align=center;perimeterSpacing=5;spacing=13;" parent="1" vertex="1">
           <mxGeometry x="370" y="-890" width="260" height="165" as="geometry" />
         </mxCell>
         <mxCell id="Co9PbLlmfqyVWT2DBjAQ-45" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;dashed=1;exitX=0.645;exitY=0.021;exitDx=0;exitDy=0;exitPerimeter=0;entryPerimeter=0;" parent="1" source="Co9PbLlmfqyVWT2DBjAQ-44" edge="1">
@@ -362,7 +362,7 @@
             <mxPoint x="107" y="-1101" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="imrjweUqyfsavA83fsZz-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;exitX=0.553;exitY=-0.004;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="emz3BBwZMGsStCKL-ABv-24">
+        <mxCell id="imrjweUqyfsavA83fsZz-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;endFill=0;exitX=0.553;exitY=-0.004;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="emz3BBwZMGsStCKL-ABv-24" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="260" y="-913" as="sourcePoint" />
             <mxPoint x="160" y="-1030" as="targetPoint" />

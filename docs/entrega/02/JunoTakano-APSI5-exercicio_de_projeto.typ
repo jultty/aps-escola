@@ -26,7 +26,7 @@
 
   #fig("img/class_200-light.drawio.png", "Diagrama de classes da arquitetura final.")
 
-  A implementação final do trabalho seguiu o projeto inicial, aproveitando as estruturas originais já possuírem IDs. A escolha arquitetural buscou desacoplar as entidades e centralizar sua persistência na classe estática `GerenciadorDeDados`, concentrando assim as dependências em um lugar onde podem ser melhor aproveitadas.
+  A implementação final do trabalho seguiu o projeto inicial, que aproveitou o fato das estruturas originais já possuírem IDs numéricos. A escolha arquitetural buscou desacoplar as entidades e centralizar sua persistência na classe estática `GerenciadorDeDados`, concentrando assim as dependências em um lugar onde podem ser melhor aproveitadas.
 
  Com exceção de apenas duas entidades, `Aluno` e `Participação`, todo o comportamento foi extraído para fora das camadas mais internas da aplicação. Um controlador foi adicionado, que através de técnicas de serialização e desserialização, providas por uma classe utilitária `Serializador`, permitem receber e enviar objetos para serem manipulados externamente à aplicação.
 
