@@ -23,11 +23,12 @@ public class Serializador <T> {
     return object;
   }
 
-  public static <T> HashMap<Integer, T> desserializarVarios(String encodedCollection) throws IOException, ClassNotFoundException {
+  public static <K, V> HashMap<K, V> desserializarVarios(String encodedCollection) throws IOException, ClassNotFoundException {
     Object decodedCollection = Serializador.desserializar(encodedCollection);
-    if (decodedCollection instanceof HashMap) {
-      if (!((HashMap<Integer, T>) decodedCollection).isEmpty()) {
-        return (HashMap<Integer, T>) decodedCollection;
+    if (decodedCollection instanceof HashMap<?, ?>) {
+      HashMap<?, ?> map = (HashMap<?, ?>) decodedCollection;
+      if (!map.isEmpty()) {
+        return (HashMap<K, V>) map;
       }
       throw new IllegalArgumentException("HashMap is empty");
     }

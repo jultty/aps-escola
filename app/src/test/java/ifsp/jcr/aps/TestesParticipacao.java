@@ -59,7 +59,7 @@ class TestesParticipacao {
     String frase = "A aula 770013 de " + aulas.get(770013).obterData() + " teve a presença das alunas " +
         alunos.get(808).obterNome() + " (id 808) e " + alunos.get(801).obterNome() + " (id 801)";
 
-    assertEquals("A aula 770013 de 2024-03-14 teve a presença das alunas Carolina (id 808) e Mariana (id 801)", frase);
+    assertEquals("A aula 770013 de " + LocalDate.now() + " teve a presença das alunas Carolina (id 808) e Mariana (id 801)", frase);
 
     System.out.println(frase);
   }
