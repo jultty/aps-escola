@@ -17,21 +17,21 @@ public class GerenciadorDeDados {
 
     private GerenciadorDeDados() {}
 
-    public static <T> Mensagem inserir(T t) {
-      if (t instanceof Turma) {
-        turmas.put(((Turma) t).obterId(), (Turma) t);
-      } else if (t instanceof Professor) {
-        professores.put(((Professor) t).obterId(), (Professor) t);
-      } else if (t instanceof Aluno) {
-        alunos.put(((Aluno) t).obterId(), (Aluno) t);
-      } else if (t instanceof Disciplina) {
-        disciplinas.put(((Disciplina) t).obterId(), (Disciplina) t);
-      } else if (t instanceof Curso) {
-        cursos.put(((Curso) t).obterId(), (Curso) t);
-      } else if (t instanceof Participacao) {
-        participacoes.put(((Participacao) t).obterId(), (Participacao) t);
-      } else if (t instanceof Aula) {
-        aulas.put(((Aula) t).obterId(), (Aula) t);
+    public static <T> Mensagem inserir(T kind) {
+      if (kind instanceof Turma t) {
+        turmas.put(t.obterId(), t);
+      } else if (kind instanceof Professor t) {
+        professores.put(t.obterId(), t);
+      } else if (kind instanceof Aluno t) {
+        alunos.put(t.obterId(), t);
+      } else if (kind instanceof Disciplina t) {
+        disciplinas.put(t.obterId(), t);
+      } else if (kind instanceof Curso t) {
+        cursos.put(t.obterId(), t);
+      } else if (kind instanceof Participacao t) {
+        participacoes.put(t.obterId(), t);
+      } else if (kind instanceof Aula t) {
+        aulas.put(t.obterId(), t);
       } else {
         throw new IllegalArgumentException("GerenciadorDeDados.inserir: Classe desconhecida");
       }
