@@ -25,12 +25,8 @@ public class Serializador <T> {
 
   public static <K, V> HashMap<K, V> desserializarVarios(String encodedCollection) throws IOException, ClassNotFoundException {
     Object decodedCollection = Serializador.desserializar(encodedCollection);
-    if (decodedCollection instanceof HashMap<?, ?>) {
-      HashMap<?, ?> map = (HashMap<?, ?>) decodedCollection;
-      if (!map.isEmpty()) {
-        return (HashMap<K, V>) map;
-      }
-      throw new IllegalArgumentException("HashMap is empty");
+    if (decodedCollection instanceof HashMap) {
+      return (HashMap<K, V>) decodedCollection; // unchecked conversion
     }
     throw new IllegalArgumentException("Not a HashMap");
   }
