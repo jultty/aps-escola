@@ -13,20 +13,23 @@ public class Serializador <T> {
     return Base64.getEncoder().encodeToString(byteOutStream.toByteArray());
   }
 
-  public static Object desserializar(String encodedObject) throws IOException, ClassNotFoundException {
+  public static <T extends Serializable> T desserializar(String encodedObject)
+      throws IOException, ClassNotFoundException {
     byte[] serializedObject = Base64.getDecoder().decode(encodedObject);
     ObjectInputStream objectInStream = new ObjectInputStream(
         new ByteArrayInputStream(serializedObject)
     );
-    Object object = objectInStream.readObject();
+    T object = (T) objectInStream.readObject(); // unchecked conversion
     objectInStream.close();
     return object;
   }
 
-  public static <K, V> HashMap<K, V> desserializarVarios(String encodedCollection) throws IOException, ClassNotFoundException {
+  public static <V extends Serializable> HashMap<Integer, V>
+  desserializarVarios(String encodedCollection)
+      throws IOException, ClassNotFoundException {
     Object decodedCollection = Serializador.desserializar(encodedCollection);
     if (decodedCollection instanceof HashMap) {
-      return (HashMap<K, V>) decodedCollection; // unchecked conversion
+      return (HashMap<Integer, V>) decodedCollection; // unchecked conversion
     }
     throw new IllegalArgumentException("Not a HashMap");
   }
