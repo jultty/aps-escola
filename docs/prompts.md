@@ -1,3 +1,5 @@
+![](docs/escola_original.png)
+
 ## 01
 
   1.1. Complete o diagrama conforme as decisões que achar mais adequadas e faça o código do projeto resultante em C++ ou Java. Os corpos dos métodos não precisam ser implementados.
