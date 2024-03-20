@@ -46,7 +46,7 @@
 
   #pad(2em)[
   #figure(
-    caption: "Método para desserialização de coleções (`HashMaps`) da classe `Serializador`",
+    caption: [Método da classe `Serializador` responsável pela desserialização de coleções (`HashMaps`).],
     supplement: "Código",
 
   )[
